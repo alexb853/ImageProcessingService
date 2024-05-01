@@ -3,7 +3,7 @@ import random
 from polybot.img_proc import Img
 import os
 
-img_path = 'polybot/test/beatles.jpeg' if '/polybot/test' not in os.getcwd() else 'beatles.jpeg'
+img_path = r'C:\Users\Alex\PycharmProjects\ProjectA\ImageProcessingService\polybot\test\beatles.jpeg'
 
 
 class TestImgConcat(unittest.TestCase):
