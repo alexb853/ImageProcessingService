@@ -184,8 +184,6 @@ class ImageProcessingBot(Bot):
                 self.data = None
                 self.send_text(chat_id, e)
         else:
-         self.send_text(msg['chat']['id'], "Please send a photo with a caption.")
-
          self.send_text(msg['chat']['id'], f"Hi {msg['chat']['first_name']}, welcome to our image processing bot."
                                            f" Please send a photo and choose one of a following captions:" + "\n"
                                            f"{', '.join(possible_captions)}")
