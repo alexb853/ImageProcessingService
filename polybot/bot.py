@@ -1,3 +1,5 @@
+from typing import Union
+
 import telebot
 from loguru import logger
 import os
@@ -172,9 +174,8 @@ class ImageProcessingBot(Bot):
                                     direction = caption
                                 else:
                                     direction = 'horizontal'
-
-                                    self.concat_photo(chat_id, self.data, path, direction)
-                                    self.data = None
+                                self.concat_photo(chat_id, self.data, path, direction)
+                                self.data = None
                         else:
                             self.send_text(chat_id, f"The caption <{caption}> is under construction.")
             except NotImplementedError as e:
@@ -183,10 +184,11 @@ class ImageProcessingBot(Bot):
             except ValueError as e:
                 self.data = None
                 self.send_text(chat_id, e)
+            except RuntimeError as e:
+                self.data = None
+                self.send_text(chat_id, e)
         else:
-         self.send_text(msg['chat']['id'], "Please send a photo with a caption.")
-
          self.send_text(msg['chat']['id'], f"Hi {msg['chat']['first_name']}, welcome to our image processing bot."
-                                           f" Please send a photo and choose one of a following captions:" + "\n"
+                                           f" Please send a photo and choose one of the following captions:" + "\n"
                                            f"{', '.join(possible_captions)}")
 
