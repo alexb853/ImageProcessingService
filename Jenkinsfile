@@ -28,6 +28,9 @@ pipeline {
                     steps {
                         withCredentials([file(credentialsId: 'telegramToken', variable: 'TELEGRAM_TOKEN')]) {
                         sh "cp ${TELEGRAM_TOKEN} .telegramToken"
+                        withCredentials(
+                        [usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS')])
+                        sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASS'
                         sh 'pip3 install -r requirements.txt'
                         sh "python3 -m pytest --junitxml results.xml tests/*.py"
                         }
